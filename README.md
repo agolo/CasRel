@@ -16,7 +16,7 @@ This repo was tested on Python 3.7 and Keras 2.2.4. The main requirements are:
 
 - tqdm
 - codecs
-- keras-bert = 0.80.0
+- keras-bert = 0.81.1
 - tensorflow-gpu = 1.13.1
 
 ## Datasets

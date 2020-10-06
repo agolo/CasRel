@@ -14,23 +14,25 @@ if(K.backend() == 'tensorflow'):
 
 parser = argparse.ArgumentParser(description='Model Controller')
 parser.add_argument('--train', default=False, type=bool, help='to train the HBT model, python run.py --train=True')
-parser.add_argument('--dataset', default='WebNLG', type=str, help='specify the dataset from ["NYT","WebNLG","ACE04","NYT10-HRL","NYT11-HRL","Wiki-KBP"]')
+parser.add_argument('--dataset', default='WebNLG', type=str, help='specify the dataset from ["NYT","WebNLG","ACE04","NYT10-HRL","NYT11-HRL","Wiki-KBP", "Semeval"]')
+parser.add_argument('--bert_model_path', default='../BERT/cased_L-12_H-768_A-12', type=str, help='Path to BERT base directory')
+
 args = parser.parse_args()
 
 
 if __name__ == '__main__':
     # pre-trained bert model config
-    bert_model = 'cased_L-12_H-768_A-12'
-    bert_config_path = 'pretrained_bert_models/' + bert_model + '/bert_config.json'
-    bert_vocab_path = 'pretrained_bert_models/' + bert_model + '/vocab.txt'
-    bert_checkpoint_path = 'pretrained_bert_models/' + bert_model + '/bert_model.ckpt'
+    bert_model = args.bert_model_path
+    bert_config_path = bert_model + '/bert_config.json'
+    bert_vocab_path =  bert_model + '/vocab.txt'
+    bert_checkpoint_path =  bert_model + '/bert_model.ckpt'
 
     dataset = args.dataset
     train_path = 'data/' + dataset + '/train_triples.json'
     dev_path = 'data/' + dataset + '/dev_triples.json'
     # test_path = 'data/' + dataset + '/test_split_by_num/test_triples_5.json' # ['1','2','3','4','5']
     # test_path = 'data/' + dataset + '/test_split_by_type/test_triples_seo.json' # ['normal', 'seo', 'epo']
-    # test_path = 'data/' + dataset + '/test_triples.json' # overall test
+    test_path = 'data/' + dataset + '/test_triples.json' # overall test
     rel_dict_path = 'data/' + dataset + '/rel2id.json'
     save_weights_path = 'saved_weights/' + dataset + '/best_model.weights'
     
