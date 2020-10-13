@@ -27,6 +27,8 @@ with open('semeval_train.txt') as f:
     for l in tqdm(f):
         a = json.loads(l)
         line = get_triples(a)
+        if line['triple_list'][0][1] == 'Other':
+            continue
         # line = {
         #         'text': a['sentText'].lstrip('\"').strip('\r\n').rstrip('\"'),
         #         'triple_list': [(i['em1Text'], i['label'], i['em2Text']) for i in a['relationMentions'] if i['label'] != 'None']
@@ -40,6 +42,8 @@ with open('semeval_val.txt') as f:
     for l in tqdm(f):
         a = json.loads(l)
         line = get_triples(a)
+        if line['triple_list'][0][1] == 'Other':
+            continue
         # line = {
         #         'text': a['sentText'].lstrip('\"').strip('\r\n').rstrip('\"'),
         #         'triple_list': [(i['em1Text'], i['label'], i['em2Text']) for i in a['relationMentions'] if i['label'] != 'None']
@@ -53,6 +57,8 @@ with open('semeval_test.txt') as f:
     for l in tqdm(f):
         a = json.loads(l)
         line = get_triples(a)
+        if line['triple_list'][0][1] == 'Other':
+            continue
         # line = {
         #         'text': a['sentText'].lstrip('\"').strip('\r\n').rstrip('\"'),
         #         'triple_list': [(i['em1Text'], i['label'], i['em2Text']) for i in a['relationMentions'] if i['label'] != 'None']
