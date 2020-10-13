@@ -3,7 +3,7 @@ from data_loader import data_generator, load_data
 from model import E2EModel, Evaluate
 from utils import extract_items, get_tokenizer, metric
 import os, argparse
-os.environ["CUDA_VISIBLE_DEVICES"] = "1"
+# os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 from keras import backend as K
 if(K.backend() == 'tensorflow'):
     import tensorflow as tf
@@ -11,6 +11,7 @@ if(K.backend() == 'tensorflow'):
     config = tf.ConfigProto()
     config.gpu_options.allow_growth = True
     sess = tf.Session(config=config)
+    # set_session(sess)
 
 parser = argparse.ArgumentParser(description='Model Controller')
 parser.add_argument('--train', default=False, type=bool, help='to train the HBT model, python run.py --train=True')
@@ -42,7 +43,7 @@ if __name__ == '__main__':
     subject_model, object_model, hbt_model = E2EModel(bert_config_path, bert_checkpoint_path, LR, num_rels)
     
     if args.train:
-        BATCH_SIZE = 6
+        BATCH_SIZE = 25
         EPOCH = 100
         MAX_LEN = 100
         STEPS = len(train_data) // BATCH_SIZE
