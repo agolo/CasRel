@@ -57,6 +57,7 @@ if __name__ == '__main__':
     else:
         hbt_model.load_weights(save_weights_path)
         test_result_path = 'results/' + dataset + '/test_result.json'
+        dev_result_path = 'results/' + dataset + '/dev_result.json'
         isExactMatch = True if dataset == 'Wiki-KBP' else False
         if isExactMatch:
             print("Exact Match")
@@ -64,4 +65,8 @@ if __name__ == '__main__':
             print("Partial Match")
         precision, recall, f1_score = metric(subject_model, object_model, test_data, id2rel, tokenizer, isExactMatch, test_result_path)
         print(f'{precision}\t{recall}\t{f1_score}')
+        precision, recall, f1_score = metric(subject_model, object_model, dev_data, id2rel, tokenizer, isExactMatch, dev_result_path)
+        print(f'{precision}\t{recall}\t{f1_score}')
+
+
 
