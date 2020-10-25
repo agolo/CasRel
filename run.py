@@ -13,8 +13,19 @@ if(K.backend() == 'tensorflow'):
     sess = tf.Session(config=config)
     # set_session(sess)
 
+def str2bool(v):
+    if isinstance(v, bool):
+       return v
+    if v.lower() in ('yes', 'true', 't', 'y', '1'):
+        return True
+    elif v.lower() in ('no', 'false', 'f', 'n', '0'):
+        return False
+    else:
+        raise argparse.ArgumentTypeError('Boolean value expected.')
+
+
 parser = argparse.ArgumentParser(description='Model Controller')
-parser.add_argument('--train', default=False, type=bool, help='to train the HBT model, python run.py --train=True')
+parser.add_argument('--train', default=False, type=str2bool, help='to train the HBT model, python run.py --train=True')
 parser.add_argument('--dataset', default='WebNLG', type=str, help='specify the dataset from ["NYT","WebNLG","ACE04","NYT10-HRL","NYT11-HRL","Wiki-KBP", "Semeval"]')
 parser.add_argument('--bert_model_path', default='../BERT/cased_L-12_H-768_A-12', type=str, help='Path to BERT base directory')
 
